@@ -1,6 +1,26 @@
 @import "tailwindcss";
 
 @theme {
+  --text-10: 10px;
+  --text-10--line-height: 14px;
+  --text-12: 12px;
+  --text-12--line-height: 16px;
+  --text-14: 14px;
+  --text-14--line-height: 20px;
+  --text-16: 16px;
+  --text-16--line-height: 24px;
+  --text-18: 18px;
+  --text-18--line-height: 22px;
+  --text-20: 20px;
+  --text-20--line-height: 24px;
+  --text-24: 24px;
+  --text-24--line-height: 30px;
+  --text-26: 26px;
+  --text-26--line-height: 32px;
+  --text-30: 30px;
+  --text-30--line-height: 38px;
+  --text-36: 36px;
+  --text-36--line-height: 44px;
   --color-fill-1: rgba(255, 255, 255, 0.1);
   --color-bankGradient: #0179FE;
   --color-indigo-500: #6172F3;
@@ -65,8 +85,6 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -102,57 +120,47 @@
   }
 }
 
-@utility text-10 {
-  font-size: 10px;
-  line-height: 14px;
-}
-
-@utility text-12 {
-  font-size: 12px;
-  line-height: 16px;
-}
-
-@utility text-14 {
-  font-size: 14px;
-  line-height: 20px;
-}
-
-@utility text-16 {
-  font-size: 16px;
-  line-height: 24px;
-}
-
-@utility text-18 {
-  font-size: 18px;
-  line-height: 22px;
-}
-
-@utility text-20 {
-  font-size: 20px;
-  line-height: 24px;
-}
-
-@utility text-24 {
-  font-size: 24px;
-  line-height: 30px;
-}
-
-@utility text-26 {
-  font-size: 26px;
-  line-height: 32px;
-}
-
-@utility text-30 {
-  font-size: 30px;
-  line-height: 38px;
-}
-
-@utility text-36 {
-  font-size: 36px;
-  line-height: 44px;
-}
-
 @layer utilities {
+  .text-10 {
+    font-size: var(--text-10);
+    line-height: var(--text-10--line-height);
+  }
+  .text-12 {
+    font-size: var(--text-12);
+    line-height: var(--text-12--line-height);
+  }
+  .text-14 {
+    font-size: var(--text-14);
+    line-height: var(--text-14--line-height);
+  }
+  .text-16 {
+    font-size: var(--text-16);
+    line-height: var(--text-16--line-height);
+  }
+  .text-18 {
+    font-size: var(--text-18);
+    line-height: var(--text-18--line-height);
+  }
+  .text-20 {
+    font-size: var(--text-20);
+    line-height: var(--text-20--line-height);
+  }
+  .text-24 {
+    font-size: var(--text-24);
+    line-height: var(--text-24--line-height);
+  }
+  .text-26 {
+    font-size: var(--text-26);
+    line-height: var(--text-26--line-height);
+  }
+  .text-30 {
+    font-size: var(--text-30);
+    line-height: var(--text-30--line-height);
+  }
+  .text-36 {
+    font-size: var(--text-36);
+    line-height: var(--text-36--line-height);
+  }
   .input-class {
     @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
   }
@@ -173,33 +181,12 @@
     @apply text-18 font-semibold text-gray-900;
   }
 
-  /* Home */
-  .home {
-    @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll;
-  }
-
-  .home-content {
-    @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
-  }
-
   .home-header {
     @apply flex flex-col justify-between gap-8;
   }
 
-  .total-balance {
-    @apply flex w-full items-center gap-4 rounded-xl border border-gray-200 p-4 shadow-chart sm:gap-6 sm:p-6;
-  }
-
-  .total-balance-chart {
-    @apply flex size-full max-w-[100px] items-center sm:max-w-[120px];
-  }
-
   .total-balance-label {
     @apply text-14 font-medium text-gray-600;
-  }
-
-  .total-balance-amount {
-    @apply text-24 lg:text-30 flex-1 font-semibold text-gray-900;
   }
 
   .recent-transactions {
@@ -223,16 +210,9 @@
   }
 
   /* Right sidebar */
-  .right-sidebar {
-    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll;
-  }
 
   .profile-banner {
     @apply h-[120px] w-full bg-gradient-mesh bg-cover bg-no-repeat;
-  }
-
-  .profile {
-    @apply relative flex px-6 max-xl:justify-center;
   }
 
   .profile-img {
@@ -281,13 +261,6 @@
     @apply flex flex-col gap-1;
   }
 
-  .header-box-title {
-    @apply text-24 lg:text-30 font-semibold text-gray-900;
-  }
-
-  .header-box-subtext {
-    @apply text-14 lg:text-16 font-normal text-gray-600;
-  }
 
   /* Bank Card */
   .bank-card {
@@ -432,20 +405,5 @@
     @apply relative size-5;
   }
 
-  /* Sidebar */
-  .sidebar {
-    @apply sticky left-0 top-0 flex h-screen w-fit flex-col  justify-between border-r border-gray-200 bg-white pt-8 text-white max-md:hidden sm:p-4 xl:p-6 2xl:w-[355px];
-  }
 
-  .sidebar-logo {
-    @apply 2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 max-xl:hidden;
-  }
-
-  .sidebar-link {
-    @apply flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start;
-  }
-
-  .sidebar-label {
-    @apply text-16 font-semibold text-black-2 max-xl:hidden;
-  }
 }
