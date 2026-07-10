@@ -311,15 +311,7 @@
     @apply flex !justify-start cursor-pointer gap-3 rounded-lg !bg-transparent flex-row;
   }
 
-  /* Auth */
-  .auth-asset {
-    @apply flex h-screen w-full sticky top-0 items-center justify-end bg-sky-1 max-lg:hidden;
-  }
-
   /* Auth Form */
-  .auth-form {
-    @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-8;
-  }
 
   .form-item {
     @apply flex flex-col gap-1.5;
@@ -381,24 +373,12 @@
     @apply flex cursor-pointer items-center justify-between gap-2 py-6;
   }
 
-  .footer_name {
-    @apply flex size-10 items-center justify-center rounded-full bg-gray-200 max-xl:hidden;
-  }
-
-  .footer_email {
-    @apply flex flex-1 flex-col justify-center max-xl:hidden;
-  }
-
   .footer_name-mobile {
     @apply flex size-10 items-center justify-center rounded-full bg-gray-200;
   }
 
   .footer_email-mobile {
     @apply flex flex-1 flex-col justify-center;
-  }
-
-  .footer_image {
-    @apply relative size-5 max-xl:w-full max-xl:flex max-xl:justify-center max-xl:items-center;
   }
 
   .footer_image-mobile {
