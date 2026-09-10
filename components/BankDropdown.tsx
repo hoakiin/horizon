@@ -11,6 +11,7 @@ export const BankDropdown = ({
   accounts = [],
   setValue,
   otherStyles,
+  onBankChange,
 }: BankDropdownProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -22,6 +23,12 @@ export const BankDropdown = ({
 
     setSeclected(account);
     setOpen(false);
+
+    if (onBankChange) {
+      onBankChange(id);
+      return;
+    }
+
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
       key: "id",

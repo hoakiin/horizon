@@ -195,6 +195,7 @@ declare interface BankDropdownProps {
   accounts: Account[];
   setValue?: (name: "senderBank", value: string) => void;
   otherStyles?: string;
+  onBankChange?: (id: string) => void;
 }
 
 declare interface BankTabItemProps {
