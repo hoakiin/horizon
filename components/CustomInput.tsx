@@ -12,9 +12,19 @@ interface CustomInput {
   name: FieldPath<z.infer<FormSchema>>;
   label: string;
   placeholder: string;
+  format?: "date";
 }
 
-function CustomInput({ control, name, label, placeholder }: CustomInput) {
+function formatDate(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+  const parts: string[] = [];
+  if (digits.length > 0) parts.push(digits.slice(0, 4));
+  if (digits.length > 4) parts.push(digits.slice(4, 6));
+  if (digits.length > 6) parts.push(digits.slice(6, 8));
+  return parts.join("-");
+}
+
+function CustomInput({ control, name, label, placeholder, format }: CustomInput) {
   return (
     <Controller
       name={name}
@@ -30,6 +40,10 @@ function CustomInput({ control, name, label, placeholder }: CustomInput) {
               autoComplete="off"
               className="input-class"
               type={name === "password" ? "password" : "text"}
+              onChange={(e) => {
+                const raw = e.target.value;
+                field.onChange(format === "date" ? formatDate(raw) : raw);
+              }}
             />
           </div>
 
