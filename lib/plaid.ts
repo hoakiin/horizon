@@ -1,3 +1,5 @@
+import "server-only";
+
 import { Configuration, PlaidApi, PlaidEnvironments } from "plaid";
 
 const configuration = new Configuration({

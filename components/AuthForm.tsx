@@ -67,7 +67,7 @@ function AuthForm({ type }: { type: string }) {
         if (response) router.push("/");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Auth error:", error);
     } finally {
       setIsLoading(false);
     }

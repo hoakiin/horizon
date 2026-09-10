@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-
 declare type SearchParamProps = {
-  params: { [key: string]: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ [key: string]: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 // ========================================
@@ -75,7 +73,6 @@ declare type Transaction = {
   category: string;
   date: string;
   image: string;
-  type: string;
   $createdAt: string;
   channel: string;
   senderBankId: string;
@@ -171,6 +168,8 @@ declare interface PageHeaderProps {
 declare interface PaginationProps {
   page: number;
   totalPages: number;
+  onPageChange: (pageNumber: number) => void;
+  isPending?: boolean;
 }
 
 declare interface PlaidLinkProps {
@@ -194,13 +193,12 @@ declare interface AuthFormProps {
 
 declare interface BankDropdownProps {
   accounts: Account[];
-  setValue?: UseFormSetValue<any>;
+  setValue?: (name: "senderBank", value: string) => void;
   otherStyles?: string;
 }
 
 declare interface BankTabItemProps {
   account: Account;
-  appwriteItemId?: string;
 }
 
 declare interface TotlaBalanceBoxProps {
@@ -211,7 +209,7 @@ declare interface TotlaBalanceBoxProps {
 
 declare interface FooterProps {
   user: User;
-  type?: 'mobile' | "desktop"
+  type?: "mobile" | "desktop";
 }
 
 declare interface RightSidebarProps {
@@ -226,7 +224,7 @@ declare interface SiderbarProps {
 
 declare interface RecentTransactionsProps {
   accounts: Account[];
-  transactions: Transaction[];
+  transactionsByItemId: Record<string, Transaction[]>;
   appwriteItemId: string;
   page: number;
 }
@@ -282,7 +280,7 @@ declare interface CreateFundingSourceOptions {
 
 declare interface CreateTransactionProps {
   name: string;
-  amount: string;
+  amount: number;
   senderId: string;
   senderBankId: string;
   receiverId: string;
@@ -325,6 +323,6 @@ declare interface getBankProps {
   documentId: string;
 }
 
-declare interface getBankByAccountIdProps {
-  accountId: string;
+declare interface getBankBySharableIdProps {
+  sharableId: string;
 }

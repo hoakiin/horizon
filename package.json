@@ -14,6 +14,7 @@
     "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cn": "^0.2.6",
     "dwolla-v2": "^3.4.2",
     "lucide-react": "^1.22.0",
     "next": "16.2.9",
