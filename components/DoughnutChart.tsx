@@ -6,6 +6,8 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function DoughnutChart({ accounts }: DoughnutChartProps) {
+  if (!accounts || accounts.length === 0) return null;
+
   const accountsNames = accounts.map((a) => a.name);
   const balances = accounts.map((a) => a.currentBalance);
 

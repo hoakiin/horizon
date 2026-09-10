@@ -1,3 +1,5 @@
+"use client";
+
 import {
   createLinkToken,
   exchangePublicToken,
@@ -15,6 +17,7 @@ import { Button } from "./button";
 function PlaidLink({ user, variant }: PlaidLinkProps) {
   const router = useRouter();
   const [token, setToken] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getLinkToken = async () => {
@@ -27,12 +30,22 @@ function PlaidLink({ user, variant }: PlaidLinkProps) {
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     async (public_token: string) => {
-      await exchangePublicToken({
-        publicToken: public_token,
-        user,
-      });
+      try {
+        setError("");
+        await exchangePublicToken({
+          publicToken: public_token,
+          user,
+        });
 
-      router.push("/");
+        router.push("/");
+      } catch (err) {
+        console.error("Bank connection error:", err);
+        setError(
+          err instanceof Error && err.message
+            ? err.message
+            : "Failed to connect bank. Please try again.",
+        );
+      }
     },
     [router, user],
   );
@@ -87,6 +100,7 @@ function PlaidLink({ user, variant }: PlaidLinkProps) {
           </p>
         </Button>
       )}
+      {error && <p className="text-14 text-red-500 mt-2">{error}</p>}
     </>
   );
 }

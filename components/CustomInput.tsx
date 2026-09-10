@@ -37,7 +37,7 @@ function CustomInput({ control, name, label, placeholder, format }: CustomInput)
               {...field}
               aria-invalid={fieldState.invalid}
               placeholder={placeholder}
-              autoComplete="off"
+              autoComplete={name === "password" ? "new-password" : "off"}
               className="input-class"
               type={name === "password" ? "password" : "text"}
               onChange={(e) => {

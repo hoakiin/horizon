@@ -14,11 +14,9 @@ const Home = async ({ searchParams }: SearchParamProps) => {
   if (!loggedIn) redirect("/sign-in");
 
   const accounts = await getAccounts({ userId: loggedIn.$id });
-
-  if (!accounts) return;
-
-  const accountsData = accounts?.data;
-  const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+  const accountsData = accounts?.data ?? [];
+  const appwriteItemId =
+    (id as string) || accountsData[0]?.appwriteItemId || "";
 
   const accountResults = await Promise.all(
     accountsData.map((account: Account) =>

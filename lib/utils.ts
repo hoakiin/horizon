@@ -65,14 +65,15 @@ export const formatDateTime = (dateString: Date) => {
   };
 };
 
-export function formatAmount(amount: number): string {
+export function formatAmount(amount: number | undefined | null): string {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
   });
 
-  return formatter.format(amount);
+  const safeAmount = typeof amount === "number" && !Number.isNaN(amount) ? amount : 0;
+  return formatter.format(safeAmount);
 }
 
 export const parseStringify = (value: unknown) => JSON.parse(JSON.stringify(value));

@@ -30,6 +30,17 @@ const CategoryBadge = ({ category }: CategoryBadgeProps) => {
 };
 
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {
+  if (!transactions || transactions.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-gray-300 bg-white p-10 text-center">
+        <p className="text-16 font-medium text-gray-500">No transactions yet</p>
+        <p className="text-14 font-normal text-gray-400">
+          Your transactions will appear here once you start using your account
+        </p>
+      </div>
+    );
+  }
+
   return (
     <Table>
       <TableHeader className="bg-[#f9fafb]">

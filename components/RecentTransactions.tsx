@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
@@ -67,6 +68,36 @@ const RecentTransactions = ({
       });
     }
   };
+
+  if (!accounts || accounts.length === 0) {
+    return (
+      <section className="recent-transactions">
+        <header className="flex items-center justify-between">
+          <h2 className="text-20 md:text-24 font-semibold text-gray-900">
+            Recent transactions
+          </h2>
+          <Link href="/my-banks" className="view-all-btn">
+            Connect a bank
+          </Link>
+        </header>
+
+        <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-gray-300 bg-white p-10 text-center">
+          <Image
+            src="/icons/credit-card.svg"
+            width={40}
+            height={40}
+            alt="no accounts"
+          />
+          <p className="text-16 font-medium text-gray-500">
+            No bank accounts connected yet
+          </p>
+          <p className="text-14 font-normal text-gray-400">
+            Connect a bank account to see your transactions here
+          </p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="recent-transactions">

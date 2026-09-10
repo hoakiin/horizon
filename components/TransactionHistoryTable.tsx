@@ -50,12 +50,14 @@ const TransactionHistoryTable = ({
         <TransactionsTable transactions={currentTransactions} />
       </div>
 
-      <Pagination
-        totalPages={totalPages}
-        page={page}
-        onPageChange={handlePageChange}
-        isPending={isPending}
-      />
+      {totalPages > 1 && (
+        <Pagination
+          totalPages={totalPages}
+          page={page}
+          onPageChange={handlePageChange}
+          isPending={isPending}
+        />
+      )}
     </section>
   );
 };

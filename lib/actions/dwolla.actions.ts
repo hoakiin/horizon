@@ -77,6 +77,19 @@ export const createDwollaCustomer = async (
     return res.headers.get("location");
   } catch (err) {
     console.error("Creating a Dwolla Customer Failed: ", err);
+    throw err;
+  }
+};
+
+export const listFundingSources = async (customerId: string) => {
+  try {
+    const res = await dwollaFetch(
+      `customers/${customerId}/funding-sources?limit=25`
+    );
+    return res.body._embedded?.["funding-sources"] ?? [];
+  } catch (err) {
+    console.error("Listing Funding Sources Failed: ", err);
+    return [];
   }
 };
 
@@ -96,7 +109,26 @@ export const createFundingSource = async (
     );
     return res.headers.get("location");
   } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+
+    if (
+      message.toLowerCase().includes("already exists") ||
+      message.toLowerCase().includes("duplicate")
+    ) {
+      const existing = await listFundingSources(options.customerId);
+      const match =
+        existing.find(
+          (fs: { name?: string; _links?: { self?: { href?: string } } }) =>
+            fs.name === options.fundingSourceName
+        ) ?? existing[0];
+
+      if (match?._links?.self?.href) {
+        return match._links.self.href;
+      }
+    }
+
     console.error("Creating a Funding Source Failed: ", err);
+    throw err;
   }
 };
 
@@ -108,6 +140,7 @@ export const createOnDemandAuthorization = async () => {
     return res.body._links;
   } catch (err) {
     console.error("Creating an On Demand Authorization Failed: ", err);
+    throw err;
   }
 };
 
@@ -130,6 +163,7 @@ export const createTransfer = async ({
     return res.headers.get("location");
   } catch (err) {
     console.error("Transfer fund failed: ", err);
+    throw err;
   }
 };
 
@@ -150,5 +184,6 @@ export const addFundingSource = async ({
     return await createFundingSource(fundingSourceOptions);
   } catch (err) {
     console.error("Transfer fund failed: ", err);
+    throw err;
   }
 };

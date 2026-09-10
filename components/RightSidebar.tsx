@@ -29,15 +29,15 @@ function RightSidebar({ user, transactions, banks }: RightSidebarProps) {
         </div>
       </section>
 
-      <section className="banks">
+<section className="banks">
         <div className="flex w-full justify-between">
           <h2 className="header-2">My banks</h2>
-          <Link href="/" className="flex gap-2">
+          <Link href="/my-banks" className="flex gap-2">
             <Image src="/icons/plus.svg" width={20} height={20} alt="plus" />
             <h2 className="text-14 font-semibold text-gray-600">Add Bank</h2>
           </Link>
         </div>
-{banks?.length > 0 && (
+{banks?.length > 0 ? (
           <div className="relative flex w-full flex-col items-center justify-center gap-5">
             <div className="relative z-10 w-[280px] -ml-10">
               <BankCard
@@ -58,16 +58,36 @@ function RightSidebar({ user, transactions, banks }: RightSidebarProps) {
               </div>
             )}
           </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-white p-6 text-center">
+            <p className="text-14 font-medium text-gray-500">
+              No banks connected yet
+            </p>
+            <Link
+              href="/my-banks"
+              className="text-14 font-semibold text-blue-600"
+            >
+              Connect a bank
+            </Link>
+          </div>
         )}
 
         <div className="mt-10 flex flex-1 flex-col gap-6">
           <h2 className="header-2">Top categories</h2>
 
-          <div className="space-y-3">
-            {categories.map((category) => (
-              <Category key={category.name} category={category} />
-            ))}
-          </div>
+          {categories.length > 0 ? (
+            <div className="space-y-3">
+              {categories.map((category) => (
+                <Category key={category.name} category={category} />
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-white p-6 text-center">
+              <p className="text-14 font-medium text-gray-500">
+                No transactions yet
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </aside>

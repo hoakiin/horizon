@@ -49,7 +49,7 @@ export const BankDropdown = ({
             alt="account"
           />
           <span className="line-clamp-1 w-full text-left text-sm font-medium text-gray-900">
-            {selected?.name}
+            {selected?.name ?? "Select a bank"}
           </span>
         </span>
         <ChevronDown

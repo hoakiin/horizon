@@ -18,6 +18,7 @@ function AuthForm({ type }: { type: string }) {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const formSchema = authFormSchema(type);
 
@@ -39,6 +40,7 @@ function AuthForm({ type }: { type: string }) {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true);
+    setError("");
 
     try {
       if (type === "sign-up") {
@@ -56,7 +58,11 @@ function AuthForm({ type }: { type: string }) {
         };
 
         const newUser = await signUp(userData);
-        setUser(newUser);
+        if (newUser) {
+          setUser(newUser);
+        } else {
+          setError("Failed to create account. Please try again.");
+        }
       }
       if (type === "sign-in") {
         const response = await signIn({
@@ -64,10 +70,14 @@ function AuthForm({ type }: { type: string }) {
           password: data.password,
         });
 
-        if (response) router.push("/");
+        if (response) {
+          router.push("/");
+        } else {
+          setError("Invalid email or password. Please try again.");
+        }
       }
     } catch (error) {
-      console.error("Auth error:", error);
+      setError("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -182,6 +192,9 @@ function AuthForm({ type }: { type: string }) {
           />
 
           <div className="flex flex-col gap-4">
+            {error && (
+              <p className="text-14 text-red-500">{error}</p>
+            )}
             <Button type="submit" className="form-btn" disabled={isLoading}>
               {isLoading ? (
                 <>

@@ -56,6 +56,7 @@ export const signIn = async ({ email, password }: signInProps) => {
     return parseStringify(user);
   } catch (error) {
     console.error("Sign in error:", error);
+    throw error;
   }
 };
 
@@ -112,6 +113,7 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
     return parseStringify(newUser);
   } catch (error) {
     console.error("Sign up error:", error);
+    throw error;
   }
 };
 
@@ -229,7 +231,7 @@ export const exchangePublicToken = async ({
     });
 
     // If the funding source URL is not created, throw an error
-    if (!fundingSourceUrl) throw Error;
+    if (!fundingSourceUrl) throw new Error("Failed to create funding source");
 
     // Create a bank account using the user ID, item ID, account ID, access token, funding source URL, and shareableId ID
     await createBankAccount({
@@ -250,6 +252,7 @@ export const exchangePublicToken = async ({
     });
   } catch (error) {
     console.error("An error occured while creating exchanging token:", error);
+    throw error;
   }
 };
 
@@ -266,6 +269,7 @@ export const getBanks = async ({ userId }: getBanksProps) => {
     return parseStringify(banks.documents);
   } catch (error) {
     console.error(error);
+    return [];
   }
 };
 
@@ -282,6 +286,7 @@ export const getBank = async ({ documentId }: getBankProps) => {
     return parseStringify(bank);
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
 
@@ -302,5 +307,6 @@ export const getBankBySharableId = async ({
     return parseStringify(banks.documents[0]);
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
