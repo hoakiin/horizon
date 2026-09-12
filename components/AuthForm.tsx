@@ -72,12 +72,14 @@ function AuthForm({ type }: { type: string }) {
 
         if (response) {
           router.push("/");
-        } else {
-          setError("Invalid email or password. Please try again.");
         }
       }
     } catch (error) {
-      setError("Something went wrong. Please try again.");
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -192,9 +194,7 @@ function AuthForm({ type }: { type: string }) {
           />
 
           <div className="flex flex-col gap-4">
-            {error && (
-              <p className="text-14 text-red-500">{error}</p>
-            )}
+            {error && <p className="text-14 text-red-500">{error}</p>}
             <Button type="submit" className="form-btn" disabled={isLoading}>
               {isLoading ? (
                 <>
